@@ -3,7 +3,9 @@ mod handlers;
 mod logging;
 mod models;
 mod routes;
+mod worker;
 
+use crate::models::AppConfig;
 use std::sync::{Arc, Mutex};
 use tracing::{dispatcher::set_global_default, event, Level};
 
@@ -15,8 +17,7 @@ use crate::routes::configure_routes;
 #[tokio::main]
 async fn main() {
     // Load configuration
-    let cfg = config::load_config().unwrap();
-
+    let cfg: AppConfig = config::load_config().unwrap();
     // Initialize logger
     LogTracer::init().expect("Failed to init logger");
 

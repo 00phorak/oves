@@ -1,6 +1,5 @@
-use tracing::{subscriber::set_global_default, Subscriber};
+use tracing::subscriber::Subscriber;
 use tracing_bunyan_formatter::{BunyanFormattingLayer, JsonStorageLayer};
-use tracing_log::LogTracer;
 use tracing_subscriber::{
     prelude::__tracing_subscriber_SubscriberExt, registry::Registry, EnvFilter,
 };

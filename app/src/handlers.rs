@@ -6,7 +6,7 @@ use std::sync::Arc;
 use tracing::event;
 use tracing::{instrument, Level};
 
-use crate::models::{AppState, AppStatus, Worker, WorkerStats};
+use crate::models::{AppState, AppStatus, ProcessReport, Worker, WorkerStats};
 
 #[instrument(skip(state))]
 #[debug_handler]
@@ -42,5 +42,30 @@ pub async fn base_path(State(state): State<Arc<AppState>>) -> Json<AppStatus> {
 #[instrument]
 #[debug_handler]
 pub async fn health() -> StatusCode {
+    StatusCode::OK
+}
+
+#[instrument]
+#[debug_handler]
+pub async fn bf_shortest_route() -> StatusCode {
+    StatusCode::OK
+}
+
+#[instrument]
+#[debug_handler]
+pub async fn offload_work() -> StatusCode {
+    StatusCode::OK
+}
+
+#[instrument]
+#[debug_handler]
+pub async fn receive_report_progress(Json(payload): Json<ProcessReport>) -> StatusCode {
+    event!(
+        Level::INFO,
+        "process report: {:?}, {:?},{:?}",
+        payload.worker_id,
+        payload.job_id,
+        payload.percentage
+    );
     StatusCode::OK
 }

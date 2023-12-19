@@ -1,8 +1,5 @@
-use axum::http::StatusCode;
-use axum_macros::debug_handler;
 use serde::{Deserialize, Serialize};
 use std::sync::{Arc, Mutex};
-use tracing::instrument;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Worker {
@@ -26,15 +23,16 @@ impl Default for AppConfig {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct ProcessReport {
+    pub job_id: String,
+    pub percentage: u8,
+    pub worker_id: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub enum AppRole {
     COORDINATOR,
     WORKER,
-}
-
-#[instrument]
-#[debug_handler]
-pub async fn health() -> StatusCode {
-    StatusCode::OK
 }
 
 #[derive(Debug, Clone, Serialize)]
