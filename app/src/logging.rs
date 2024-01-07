@@ -7,8 +7,8 @@ use tracing_subscriber::{
 pub fn configure_tracing() -> impl Subscriber + Send + Sync {
     let env_filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info"));
     let formatting_layer = BunyanFormattingLayer::new("oves".into(), std::io::stdout);
-    return Registry::default()
+    Registry::default()
         .with(env_filter)
         .with(JsonStorageLayer)
-        .with(formatting_layer);
+        .with(formatting_layer)
 }
