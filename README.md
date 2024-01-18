@@ -1,1 +1,6 @@
-OVES - Over-Engineered Solution
+Template Rust Project
+  - Metrics
+  - Tracing
+  - Loading config
+  - Router setup
+  
